@@ -1,0 +1,73 @@
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Scanner;
+
+public class maximum_sum {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		int i;
+		Integer[] A = new Integer[5];
+		Scanner input = new Scanner(System.in);
+		
+		System.out.println("Enter Array:");
+		for(i=0;i<5;i++) {
+			A[i] = input.nextInt();
+		}
+		
+		Arrays.sort(A, Collections.reverseOrder());
+		
+		find_max_sum(A, 5);
+
+	}
+
+
+	public static void find_max_sum(Integer[] A, int num) {
+		// TODO Auto-generated method stub
+		
+		Integer[] globel_array = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		int i, j, fetch, digit, sum = 0, temp_num;
+		
+		for(i=0;i<num;i++) {
+			fetch = A[i];
+			temp_num = fetch;
+			Integer[] temp_array = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+			int flag = 0;
+
+			while(fetch > 0) {
+				digit = fetch%10;
+				fetch = fetch/10;
+				temp_array[digit] = 1;
+			}
+			
+			for(j=0;j<10;j++) {
+				if(globel_array[j] == 1 && temp_array[j] == 1) {
+					flag = 1;
+					break;
+				}
+			}
+			
+			if(flag == 1) {
+				continue;
+			}
+			else {
+				for(j=0;j<10;j++) {
+					if(temp_array[j] == 1) {
+						globel_array[j] = 1;
+					}
+				}
+				System.out.println(" Number used : "+ temp_num);
+				
+				sum = sum + temp_num;
+				
+			}
+			
+		}
+		
+	System.out.println("Maximum Sum is : "+ sum);
+		
+	}
+
+
+}
